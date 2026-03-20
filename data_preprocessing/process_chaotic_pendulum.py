@@ -160,6 +160,51 @@ def convert_raw_data_to_dictionary(data_file, title, skip_lines, include_fit=Fal
     return output_dictionary
 
 
+def plot_experimental_data(data_dict, plot_exponential_fit=False):
+    """
+    Validation tool to verify data integrity across both dimensions.
+    Arguments:
+    data_dict -- dictionary containing the time, angular position and the angular velocity 
+    and optionally, the exponential fit parameters and fit data.
+    plot_exponential_fit -- boolean variable indicating whether we should also plot the fitten
+    exponential function over the time series data.
+    """
+
+    time_array = data_dict["raw_data"]["time"]
+    phi_array = data_dict["raw_data"]["phi"]
+    omega_array = data_dict["raw_data"]["omega"]
+
+    fig, ax = plt.subplots(1,2)
+    fig.set_size_inches(12, 5)
+    plt.style.use('science')
+                  
+    # Left subplot
+    ax[0].plot(time_array, phi_array, "-", label="Experimental data")
+    ax[0].set_xlabel("Time t(s)")
+    ax[0].set_ylabel(r"Angular position $\phi(t)(rad)$")
+
+    if (plot_exponential_fit):
+        time_fit_array = data_dict["fit_data"]["time_fit"]
+        phi_fit_array = data_dict["fit_data"]["phi_fit"]
+        time_peaks_array = data_dict["fit_data"]["time_peaks"]
+        phi_peaks_array = data_dict["fit_data"]["phi_peaks"]
+
+        ax[0].plot(time_fit_array, phi_fit_array, "k--", label="Non-linear fit")
+        ax[0].plot(time_peaks_array, phi_peaks_array, "k.", label="Amplitude peaks")
+    
+    # Right subplot
+    ax[1].plot(phi_array, omega_array, "-", label="Experimental data")
+    ax[1].set_xlabel(r"Angular position $\phi(t)(rad)$")
+    ax[1].set_ylabel(r"Angular velocity $\omega(t)(rad/s)$")
+
+    ax[0].grid(True)
+    ax[1].grid(True)
+    ax[0].legend()
+    ax[1].legend()
+    plt.show()
+    plt.close()
+
+
 def main():
     # Get the data dictionaries
     harmonic_data_dictionary = convert_raw_data_to_dictionary("Harmonic_10_2.txt", "Harmonic Motion", 5, True)
