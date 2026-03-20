@@ -211,11 +211,20 @@ def main():
     damped_data_dictionary = convert_raw_data_to_dictionary("Damped_18_High.txt", "Damped Motion", 5)
     driven_data_dictionary = convert_raw_data_to_dictionary("Driven_T_85_Frames.txt", "Driven Motion", 5)
     
+    """
+        Two different experiments are needed to show chaotic motion. Comparing chaotic_data_dictionary_1 and 2
+        shows that for a double-well potential, even nearly identical initial conditions,
+        can lead to drastically different long-term trajectories.
+    """
+    chaotic_data_dictionary_1 = convert_raw_data_to_dictionary("Double_18_2.txt", "Chaotic Motion 1", 5)
+    chaotic_data_dictionary_2 = convert_raw_data_to_dictionary("Double_18_3.txt", "Chaotic Motion 2", 5)
+    
     # Write the data dictionaries as json objects into a file
     write_dictionary_to_json(harmonic_data_dictionary, "harmonic_oscillator_data")
     write_dictionary_to_json(damped_data_dictionary, "damped_oscillator_data")
     write_dictionary_to_json(driven_data_dictionary, "driven_oscillator_data")
-
+    write_dictionary_to_json(chaotic_data_dictionary_1, "chaotic_motion_data_1")
+    write_dictionary_to_json(chaotic_data_dictionary_2, "chaotic_motion_data_2")
 
 if __name__ == '__main__':
     main()
