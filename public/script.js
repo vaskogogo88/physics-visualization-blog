@@ -88,3 +88,48 @@ function plotTimeSeries(dataObject, titleString, divID, includeNonLinearFit=fals
     }
     Plotly.newPlot(divID, timeSeriesData, layout);
 };
+
+
+function plotPhaseSpace(dataObject, titleString, divID) {
+    const xExpData = dataObject.raw_data["phi"];
+    const yExpData = dataObject.raw_data["omega"];
+
+    const phaseSpaceData = [{
+        x: xExpData,
+        y: yExpData,
+        mode: "lines",
+        name: "Experimental data"
+    }];
+
+    const layout = {
+        title: {
+            text: titleString,
+            font: {
+                family: "Computer Modern",
+                size: 24
+            }
+        },
+        xaxis: {
+            title: {
+                text: "$\\text{Angular position} \\; \\; \\phi(rad)$",
+                font: {
+                    family: "Computer Modern",
+                    size: 18,
+                    color: "rgb(0,0,0)"
+                }
+            }
+        },
+        yaxis: {
+            title: {
+                text: "$\\text{Angular velocity} \\; \\; \\omega(rad/s)$",
+                font: {
+                    family: "Computer Modern",
+                    size: 18,
+                    color: "rgb(0,0,0)"
+                }
+            }
+        }
+    }
+
+    Plotly.newPlot(divID, phaseSpaceData, layout);
+}
