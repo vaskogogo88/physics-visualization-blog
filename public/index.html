@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chaotic Pendulum Experiment</title>
+    <script src="https://cdn.plot.ly/plotly-3.4.0.js" charset="utf-8"></script>
+    <script src="script.js" defer type="module"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 id="title">Exploring Non-linear Dynamics: From Simple Harmonics to Deterministic Chaos</h1>
+    <h2 id="introduction">Introduction</h2>
+    <p> 
+        This project presents an interactive study of Pohl's torsion pendulum, utilizing 
+        a custom-built data pipeline to explore dynamic behaviors ranging from 
+        simple harmonic motion to chaotic oscillations. By analyzing the system across 
+        four distinct regimes, specifically undamped, damped, damped-driven, and chaotic, 
+        I demonstrate how incremental changes in parameters such as friction, external driving 
+        forces, and potential well configurations fundamentally alter the system's evolution.
+    </p>
+    <p>
+        Using Python and video tracking software, I extracted high-resolution angular displacement,
+        velocity, and acceleration data to construct the interactive 3D phase space trajectories 
+        and Poincaré maps featured below. While the transition to a double-well potential successfully 
+        induced non-linear behavior, capturing a clear 'Butterfly Effect' proved challenging. 
+        The inherent limitations of 30 fps video tracking and environmental noise introduced enough 
+        uncertainty to mask the system's sensitive dependence on initial conditions. However, the 
+        resulting phase space trajectories still clearly demonstrate the irregular, non-repeating 
+        nature characteristic of deterministic chaos.
+    </p>
+    <h2 id="results">Results</h2>
+    
+    <!-- Harmonic Motion Section -->
+    <h3 id="harmonic-motion">Harmonic Motion</h3>
+    <div class="harmonic-motion-plot" id="harmonic-time-series-fit"></div>
+    <div class="harmonic-motion-plot" id="harmonic-phase-space-2d"></div>
+    <div class="harmonic-motion-plot" id="harmonic-state-space-3d"></div>
+    
+    <!-- Damped Motion Section -->
+    <h3 id="damped-motion">Damped Motion</h3>
+    <div class="damped-motion-plot" id="damped-time-series"></div>
+    <div class="damped-motion-plot" id="damped-phase-space-2d"></div>
+    <div class="damped-motion-plot" id="damped-state-space-3d"></div>
+
+    <!-- Driven Motion Section -->
+    <h3 id="driven-motion">Driven Motion</h3>
+    <div class="driven-motion-plot" id="driven-time-series"></div>
+    <div class="driven-motion-plot" id="driven-phase-space-2d"></div>
+    <div class="driven-motion-plot" id="driven-state-space-3d"></div>
+
+    <!-- Chaotic Motion Section -->
+    <h3 id="chaotic-motion">Chaotic Motion</h3>
+    <div class="chaotic-motion-plot" id="chaotic-time-series-first"></div>
+    <div class="chaotic-motion-plot" id="chaotic-phase-space-first"></div>
+    <div class="chaotic-motion-plot" id="chaotic-time-series-second"></div>
+    <div class="chaotic-motion-plot" id="chaotic-phase-space-second"></div>
+
+    <h2 id="conclusion">Conclusion</h2>
+</body>
+</html>
