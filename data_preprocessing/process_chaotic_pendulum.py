@@ -118,8 +118,11 @@ def convert_raw_data_to_dictionary(data_file, title, skip_lines, include_fit=Fal
     
     # Get the angular position phi from the harmonic data
     phi_array = degrees_to_rad(raw_data[:,3])
-    # Shift the angular position so the final resting state is 0 rad (equilibrium)
-    phi_array = phi_array - phi_array[-1]
+    
+    # For every experiment except the chaotic motion shift the angular position so the final 
+    # resting state is 0 rad (equilibrium)
+    if (title.split(" ")[0] != "Chaotic"):
+        phi_array = phi_array - phi_array[-1] 
 
     # Get the angular velocity omega
     omega_array = degrees_to_rad(raw_data[:,4])
