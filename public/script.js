@@ -208,3 +208,114 @@ function plotStateSpace3D(dataObject, titleString, divID) {
 
     Plotly.newPlot(divID, stateSpace3DData, layout);
 }
+
+
+function getPlotDivData() {
+    /**
+     * @description - constructs an object of objects containing the div data that will be used for plotting 
+     * the experimental data. Each sub-object has a divIDs key containing an array with the names of the divs
+     * that will be used to plot the corresponding data, timeSeriesFit key (boolean) indicating whether the non-linear fit
+     * will be plotted, and spaceSpacePlot key (boolean) indicating whether the 3d state space plot will be plotted.
+     * @returns {Object} - An object that contains div IDs and plotting flags (timeSeriesFit, stateSpacePlot)
+     */
+
+    let plotDivData = {
+        harmonicPlot: {
+            divIDs: ["harmonic-time-series-fit", "harmonic-phase-space-2d", "harmonic-state-space-3d"],
+            timeSeriesFit: true,
+            stateSpacePlot: true
+        }, 
+        dampedPlot: {
+            divIDs: ["damped-time-series", "damped-phase-space-2d", "damped-state-space-3d"],
+            timeSeriesFit: false,
+            stateSpacePlot: true
+        },
+        drivenPlot: {
+            divIDs: ["driven-time-series", "driven-phase-space-2d", "driven-state-space-3d"],
+            timeSeriesFit: false,
+            stateSpacePlot: true
+        },
+        chaoticPlot1: {
+            divIDs: ["chaotic-time-series-first", "chaotic-phase-space-first"],
+            timeSeriesFit: false,
+            stateSpacePlot: false
+        },
+        chaoticPlot2: {
+            divIDs: ["chaotic-time-series-second", "chaotic-phase-space-second"],
+            timeSeriesFit: false,
+            stateSpacePlot: false
+        }
+
+    };
+
+    return plotDivData;
+}
+
+
+function getFigureTitles() {
+    /**
+     * @returns {Object} - An object containing the figure titles for each physical experiment
+     */
+    
+    return {
+        harmonicPlot: "Simple Harmonic Motion",
+        dampedPlot: "Damped Harmonic Motion",
+        drivenPlot: "Damped Driven Harmonic Motion",
+        chaoticPlot1: "Chaotic Motion (Experiment 1)",
+        chaoticPlot2: "Chaotic Motion (Experiment 2)",
+    }
+}
+
+
+function getJSONDataObject() {
+    /**
+     * Aggregates all imported experimental datasets into a single reference object.
+     * @returns {Object} A collection of JSON data objects for each physical experiment.
+     */
+    return {
+        harmonicPlot: harmonicJSON,
+        dampedPlot: dampedJSON,
+        drivenPlot: drivenJSON,
+        chaoticPlot1: chaoticJSON1,
+        chaoticPlot2: chaoticJSON2
+    };
+}
+
+
+function plotExperimentalData(dataObject, plotDataObject, figureTitles) {
+    /**
+     * Plot each the time series, phase space and (optionally) the 3d state space plot
+     * for each experiment.
+     * @param {Object} dataObject - An object containing JSON data objects for each physical experiment
+     * @param {Object} plotDataObject - An object that contains div IDs and plotting flags 
+     * (timeSeriesFit, stateSpacePlot) for each experiment case. 
+     */
+
+    // Iterate over each key in the plotDataObject.
+    for (let key in plotDataObject) {
+        
+        let experiment = plotDataObject[key];
+        let data = dataObject[key];
+        let baseTitle = figureTitles[key];
+
+        // plot the time series plot 
+        let timeSeriesTitle = `$\\text{${baseTitle} Time Series} \\; \\; \\phi=f(t)$`;
+        plotTimeSeries(data, timeSeriesTitle, experiment.divIDs[0], experiment.timeSeriesFit);
+        
+        // plot the phase space plot
+        let phaseSpaceTitle = `$\\text{${baseTitle} Phase Space} \\; \\; \\omega=f(\\phi)$`;
+        plotPhaseSpace(data, phaseSpaceTitle, experiment.divIDs[1])
+
+        // if the stateSpacePlot flag is true, plot the 3d state space plot.
+        if (experiment.stateSpacePlot) {
+            let stateSpaceTitle = `$\\text{${baseTitle} 3D State Space} \\; \\; \\ (\\phi, \\omega, t)$`
+            plotStateSpace3D(data, stateSpaceTitle, experiment.divIDs[2]);
+        }   
+    }
+}
+
+let divDataObject = getPlotDivData();
+let figureTitles = getFigureTitles();
+let jsonDataObject = getJSONDataObject();
+plotExperimentalData(jsonDataObject, divDataObject, figureTitles);
+
