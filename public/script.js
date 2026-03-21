@@ -133,3 +133,78 @@ function plotPhaseSpace(dataObject, titleString, divID) {
 
     Plotly.newPlot(divID, phaseSpaceData, layout);
 }
+
+
+function plotStateSpace3D(dataObject, titleString, divID) {
+    const xExpData = dataObject.raw_data.phi;
+    const yExpData = dataObject.raw_data.omega;
+    const zExpData = dataObject.raw_data.time;
+
+    const stateSpace3DData = [{
+        x: xExpData,
+        y: yExpData,
+        z: zExpData,
+        type: "scatter3d",
+        mode: "markers",
+        name: "Experimental data",
+        opacity: 0.9,
+        marker: {
+            size: 7.5,
+            color: "rgb(64, 145, 182)",
+            line: {
+                color: "black",
+                width: 1,
+                opacity: 0.6
+            }
+        }
+    }];
+
+    const layout = {
+        title: {
+            text: titleString,
+            font: {
+                family: "Computer Modern",
+                size: 24
+            }
+        },
+        scene: {
+            camera: {
+                eye: {x: 1., y:2., z:1.}
+            },
+            xaxis: {
+                title: {
+                    text: "φ(rad)",
+                    font: {
+                        family: "Computer Modern",
+                        size: 18,
+                        color: "rgb(0,0,0)"
+                    }
+                }
+            },
+            yaxis: {
+                title: {
+                    text: "ω(rad/s)",
+                    font: {
+                        family: "Computer Modern",
+                        size: 18,
+                        color: "rgb(0,0,0)"
+                    }
+                }
+            },
+            zaxis: {
+                title: {
+                    text: "t(s)",
+                    font: {
+                        family: "Computer Modern",
+                        size: 18,
+                        color: "rgb(0,0,0)"
+                    }
+                }
+            },
+        },
+        width: 550,
+    	height: 550
+    }
+
+    Plotly.newPlot(divID, stateSpace3DData, layout);
+}
