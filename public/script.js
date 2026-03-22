@@ -168,8 +168,13 @@ function plotStateSpace3D(dataObject, titleString, divID) {
             }
         },
         scene: {
+            aspectratio: {
+                x: 2.3,
+                y: 2.3,
+                z: 1.6
+            },
             camera: {
-                eye: {x: 1., y:2., z:1.}
+                eye: {x: 3, y:3, z:1.}
             },
             xaxis: {
                 title: {
@@ -202,8 +207,12 @@ function plotStateSpace3D(dataObject, titleString, divID) {
                 }
             },
         },
-        width: 550,
-    	height: 550
+        margin: {
+            l: 0,
+            r: 0,
+            b: 25,
+            t: 50
+        }
     }
 
     Plotly.newPlot(divID, stateSpace3DData, layout);
