@@ -1,0 +1,89 @@
+body {
+    font-family: 'Inter', BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #2d3436; 
+    line-height: 1.7;
+    font-size: 18px;
+
+}
+
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+
+h2 {
+    font-size: 2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+
+}
+
+
+h3 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+
+p {
+    text-align: justify;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.content-container, .title-container {
+    width: 55%;
+}
+
+
+.title-container {
+    text-align: center;
+    margin-top: 75px;
+}
+
+#conclusion-container {
+    margin-bottom: 150px;
+}
+
+
+.harmonic-motion-container, .damped-motion-container, .driven-motion-container,
+.chaotic-motion-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.harmonic-motion-plot,
+.driven-motion-plot,
+.damped-motion-plot,
+.chaotic-motion-plot {
+    transition: transform .2s;
+    margin-bottom: 2.5rem;
+}
+
+
+.harmonic-motion-plot:hover,
+.driven-motion-plot:hover,
+.damped-motion-plot:hover,
+.chaotic-motion-plot:hover {
+    transform: scale(1.05);
+}
+
+
+#harmonic-time-series-fit,
+#driven-time-series,
+#damped-time-series,
+#chaotic-time-series-first {
+    margin-top: 2.5rem;
+}

@@ -11,53 +11,149 @@
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-    <h1 id="title">Exploring Non-linear Dynamics: From Simple Harmonics to Deterministic Chaos</h1>
-    <h2 id="introduction">Introduction</h2>
-    <p> 
-        This project presents an interactive study of Pohl's torsion pendulum, utilizing 
-        a custom-built data pipeline to explore dynamic behaviors ranging from 
-        simple harmonic motion to chaotic oscillations. By analyzing the system across 
-        four distinct regimes, specifically undamped, damped, damped-driven, and chaotic, 
-        I demonstrate how incremental changes in parameters such as friction, external driving 
-        forces, and potential well configurations fundamentally alter the system's evolution.
-    </p>
-    <p>
-        Using Python and video tracking software, I extracted high-resolution angular displacement,
-        velocity, and acceleration data to construct the interactive 3D phase space trajectories 
-        and Poincaré maps featured below. While the transition to a double-well potential successfully 
-        induced non-linear behavior, capturing a clear 'Butterfly Effect' proved challenging. 
-        The inherent limitations of 30 fps video tracking and environmental noise introduced enough 
-        uncertainty to mask the system's sensitive dependence on initial conditions. However, the 
-        resulting phase space trajectories still clearly demonstrate the irregular, non-repeating 
-        nature characteristic of deterministic chaos.
-    </p>
-    <h2 id="results">Results</h2>
-    
-    <!-- Harmonic Motion Section -->
-    <h3 id="harmonic-motion">Harmonic Motion</h3>
-    <div class="harmonic-motion-plot" id="harmonic-time-series-fit"></div>
-    <div class="harmonic-motion-plot" id="harmonic-phase-space-2d"></div>
-    <div class="harmonic-motion-plot" id="harmonic-state-space-3d"></div>
-    
-    <!-- Damped Motion Section -->
-    <h3 id="damped-motion">Damped Motion</h3>
-    <div class="damped-motion-plot" id="damped-time-series"></div>
-    <div class="damped-motion-plot" id="damped-phase-space-2d"></div>
-    <div class="damped-motion-plot" id="damped-state-space-3d"></div>
+    <div class="container">
+        <div class="title-container">
+            <h1 id="title">Exploring Non-linear Dynamics: From Simple Harmonics to Deterministic Chaos</h1>
+        </div>
+        
+        <div class="content-container">
+            <div class="zoom"></div>
+            <h2 id="introduction">Introduction</h2>
+            <p> 
+                This project presents an interactive study of Pohl's torsion pendulum, utilizing 
+                a custom-built data pipeline to explore dynamic behaviors ranging from 
+                simple harmonic motion to chaotic oscillations. By analyzing the system across 
+                four distinct regimes, specifically undamped, damped, damped-driven, and chaotic, 
+                we demonstrate how incremental changes in parameters such as friction, external driving 
+                forces, and potential well configurations fundamentally alter the system's evolution.
+            </p>
+            <p>
+                Using Python and video tracking software, I extracted high-resolution angular displacement,
+                velocity, and acceleration data to construct the interactive 3D phase space trajectories 
+                featured below. The transition to a double-well potential successfully induced non-linear 
+                behavior, which can be clearly seen from the resulting phase space and time series trajectories.
+            </p>
+            <h2 id="results">Results</h2>
+        
+            <!-- Harmonic Motion Section -->
+            <h3 id="harmonic-motion">Harmonic Motion</h3>
+            <p>
+                In the first part of the experiment, we investigated the behavior of Pohl's 
+                torsion pendulum under simple harmonic motion, where the only acting force was
+                the restoring torque exerted by the spring. The rotating disk of the pendulum 
+                was manually displaced from its equilibrium position and released from rest, 
+                allowing it to oscillate freely from different initial angular displacements 
+                \(\phi_0\) without any initial velocity \(\omega_0\).
+            </p>
 
-    <!-- Driven Motion Section -->
-    <h3 id="driven-motion">Driven Motion</h3>
-    <div class="driven-motion-plot" id="driven-time-series"></div>
-    <div class="driven-motion-plot" id="driven-phase-space-2d"></div>
-    <div class="driven-motion-plot" id="driven-state-space-3d"></div>
+            <p>
+                Although no external driving forces were applied, as shown in the time 
+                series plot \(\phi = f(t)\), a slight exponential decay is observed due 
+                to frictional forces acting within the system. The presence of friction 
+                alters the trajectory shown in the Harmonic Phase Space diagram below. 
+                Under ideal, undamped conditions, this path would follow a perfectly 
+                closed orbit. Finally, from the 3D state space plot, we can see that as 
+                time progresses, both the angular displacement \(\phi\) and the angular
+                velocity \(\omega\) approach zero.
+            </p>
+            <div class="harmonic-motion-container">
+                <div class="harmonic-motion-plot" id="harmonic-time-series-fit"></div>
+                <div class="harmonic-motion-plot" id="harmonic-phase-space-2d"></div>
+                <div class="harmonic-motion-plot" id="harmonic-state-space-3d"></div>
+            </div>
 
-    <!-- Chaotic Motion Section -->
-    <h3 id="chaotic-motion">Chaotic Motion</h3>
-    <div class="chaotic-motion-plot" id="chaotic-time-series-first"></div>
-    <div class="chaotic-motion-plot" id="chaotic-phase-space-first"></div>
-    <div class="chaotic-motion-plot" id="chaotic-time-series-second"></div>
-    <div class="chaotic-motion-plot" id="chaotic-phase-space-second"></div>
+            <!-- Damped Motion Section -->
+            <h3 id="damped-motion">Damped Motion</h3>
+            <p>
+                In the second part of the experiment, we examine the behavior of Pohl's 
+                torsion pendulum when subjected to a damping force arising from Eddy 
+                currents induced by the magnetic coils. The total damping results from 
+                the superposition of mechanical friction and these electromagnetic forces. 
+                As a result, a more pronounced decay in the amplitude of oscillation is 
+                observed compared to the simple harmonic case. 
+            </p>
+            <p>
+                As observed from the damped time series plot, the 
+                system converges to equilibrium significantly faster while still 
+                maintaining its oscillatory nature. This demonstrates the transition 
+                toward a higher damping ratio \(\delta\), where energy is dissipated 
+                more rapidly through the disk's interaction with the magnetic field.
+            </p>
+            <div class="damped-motion-container">
+                <div class="damped-motion-plot" id="damped-time-series"></div>
+                <div class="damped-motion-plot" id="damped-phase-space-2d"></div>
+                <div class="damped-motion-plot" id="damped-state-space-3d"></div>
+            </div>
 
-    <h2 id="conclusion">Conclusion</h2>
+            <!-- Driven Motion Section -->
+            <h3 id="driven-motion">Driven Motion</h3>
+            <p>
+                In this section, we attempted to counteract damping losses by introducing an external 
+                periodic driving force. While five different frequencies were tested, only one is 
+                featured here to demonstrate the system reaching steady-state. 
+                This condition occurs once initial transients have decayed, resulting in a stable 
+                synchronization between the driving force and the pendulum's response. The phase 
+                space for this regime reveals a limit cycle, closely resembling the behavior of 
+                an ideal oscillator.
+            </p>
+            <div class="driven-motion-container">
+                <div class="driven-motion-plot" id="driven-time-series"></div>
+                <div class="driven-motion-plot" id="driven-phase-space-2d"></div>
+                <div class="driven-motion-plot" id="driven-state-space-3d"></div>
+            </div>
+
+            <!-- Chaotic Motion Section -->
+            <h3 id="chaotic-motion">Chaotic Motion</h3>
+            <p>
+                Observing chaotic behavior in Pohl's torsion pendulum requires introducing a 
+                double-well potential, which creates the necessary nonlinear 
+                restoring forces. This was achieved by attaching two masses symmetrically to the 
+                pendulum. We first examined the pendulum's motion without applying any external 
+                driving force, allowing it to oscillate from two slightly different initial 
+                angular displacements \(\phi_{01}\) and \(\phi_{02}\) to test for sensitive 
+                dependence on initial conditions.
+            </p>
+
+            <p>
+                The sensitivity to initial conditions can be seen from the Chaotic Motion 
+                Experiment 1 and Experiment 2 time series plots. The system reaches
+                equilibrium at different angular displacements \(\phi\), depending on the 
+                initial conditions. This behavior arises from the presence of the double 
+                potential well, which allows the pendulum to settle into different local 
+                minima based on its starting position.
+            </p>
+            <div class="chaotic-motion-container">
+                <div class="chaotic-motion-plot" id="chaotic-time-series-first"></div>
+                <div class="chaotic-motion-plot" id="chaotic-phase-space-first"></div>
+                <div class="chaotic-motion-plot" id="chaotic-time-series-second"></div>
+                <div class="chaotic-motion-plot" id="chaotic-phase-space-second"></div>
+            </div>
+
+            <div id="conclusion-container">
+                <h2 id="conclusion">Conclusion</h2>
+                <p>
+                    In this experiment, we investigated the dynamic behavior of Pohl's torsion 
+                    pendulum under different physical conditions. Beginning with simple harmonic
+                    motion, we confirmed the theoretical predictions for oscillations with and
+                    without damping. By introducing an external periodic torque, we were
+                    able to compensate for energy loss and study the system's transition to 
+                    steady-state oscillations.
+                </p>
+                <p>
+                    The most intriguing results emerged when the pendulum was modified to 
+                    introduce a double potential well, enabling the observation of nonlinear
+                    and chaotic dynamics. We demonstrated that small changes in initial conditions 
+                    could lead to significantly different outcomes. 
+                </p>
+                <p>
+                    Overall, the study highlights the rich and diverse behaviors present in 
+                    even a simple mechanical system and provides insight into the onset of 
+                    chaos in deterministic physical systems. The experimental results align
+                    well with theoretical expectations and reinforce key principles of classical
+                    and nonlinear dynamics.
+                </p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
