@@ -211,7 +211,7 @@ function plotStateSpace3D(dataObject, titleString, divID) {
             l: 0,
             r: 0,
             b: 25,
-            t: 50
+            t: 90
         }
     }
 
